@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Wagondash Admin</title>
+    <!-- base:css -->
+    <link rel="stylesheet" href="../../static/adminResources/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/adminResources/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../static/adminResources/css/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../../static/adminResources/images/favicon.png"/>
+</head>
+
+<body class="sidebar-light">
+<div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+
+
+    {% include 'admin/header.html' %}
+
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_settings-panel.html -->
+        <div class="theme-setting-wrapper">
+            <div id="settings-trigger"><i class="mdi mdi-settings"></i></div>
+            <div id="theme-settings" class="settings-panel">
+                <i class="settings-close mdi mdi-close"></i>
+                <p class="settings-heading">SIDEBAR SKINS</p>
+                <div class="sidebar-bg-options" id="sidebar-light-theme">
+                    <div class="img-ss rounded-circle bg-light border mr-3"></div>
+                    Light
+                </div>
+                <div class="sidebar-bg-options selected" id="sidebar-dark-theme">
+                    <div class="img-ss rounded-circle bg-dark border mr-3"></div>
+                    Dark
+                </div>
+                <p class="settings-heading mt-2">HEADER SKINS</p>
+                <div class="color-tiles mx-0 px-4">
+                    <div class="tiles success"></div>
+                    <div class="tiles warning"></div>
+                    <div class="tiles danger"></div>
+                    <div class="tiles primary"></div>
+                    <div class="tiles info"></div>
+                    <div class="tiles dark"></div>
+                    <div class="tiles default"></div>
+                </div>
+            </div>
+        </div>
+        <!-- partial -->
+        <!-- partial:../../partials/_sidebar.html -->
+
+
+        {% include 'admin/menu.html' %}
+
+
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+
+                <div class="row grid-margin">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Add Employee</h4>
+                                <form class="cmxform" method="post" action="/admin/updateEmployee">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label for="cdepartment">Employee Department</label>
+                                            <select name="employee_DepartmentId" class="form-control">
+                                                {% for i1 in departmentVOList %}
+                                                    <option value="{{ i1['departmentId'] }}">{{ i1['departmentName'] }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cdesignation">Employee Designation</label>
+                                            <select name="employee_DesignationId" class="form-control">
+                                                {% for i2 in designationVOList %}
+                                                    <option value="{{ i2['designationId'] }}">{{ i2['designationName'] }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        {% for row1 in employeeVOList %}
+
+                                            <input  name="employeeId" value="{{ row1[0]['employeeId'] }}">
+                                            <div class="form-group">
+                                                <label for="cname">Employee Firstname </label>
+                                                <input id="cname" class="form-control" name="employeeFirstName"
+                                                       value="{{ row1[0]['employeeFirstName'] }}" type="text" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cemail">Employee Lastname </label>
+                                                <input id="cemail" class="form-control" type="text"
+                                                       name="employeeLastName" value="{{ row1[0]['employeeLastName'] }}"
+                                                       required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cemail">Employee Salary </label>
+                                                <input id="cemail" class="form-control" type="text"
+                                                       name="employeeSalary" value="{{ row1[0]['employeeSalary'] }}"
+                                                       required>
+                                            </div>
+
+                                            <input type="hidden" value="{{ row1[1]['loginId'] }}" name="loginId"/>
+                                            <div class="form-group">
+                                                <label for="cemail">Employee Email</label>
+                                                <input id="cemail" class="form-control" type="email"
+                                                       name="loginUsername" value="{{ row1[1]['loginUsername'] }}"
+                                                       required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cemail">Employee Contact Number </label>
+                                                <input id="cemail" class="form-control" type="number"
+                                                       name="employeeContactNumber"
+                                                       value="{{ row1[0]['employeeContactNumber'] }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cemail">Employee Address </label>
+                                                <textarea id="cemail" rows="5" class="form-control" type="text"
+                                                          name="employeeAddress"
+                                                          required>{{ row1[0]['employeeAddress'] }}</textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cemail">Employee BirthDate </label>
+                                                <input id="cemail" class="form-control" type="date"
+                                                       name="employeeBirthDate"
+                                                       value="{{ row1[0]['employeeBirthDate'] }}"
+                                                       required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cbloodgroup">Employee Blood Group</label>
+                                                <input type="text" name="employeeBloodGroup" class="form-control"
+                                                       value="{{ row1[0]['employeeBloodGroup'] }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cmaritalstatus">Employee Marital Status</label>
+                                                <input id="cemail" class="form-control" type="radio"
+                                                       name="employeeMaritalStatus" value="single" checked>Single
+                                                <input id="cemail" class="form-control" type="radio"
+                                                       name="employeeMaritalStatus" value="married">Married
+                                            </div>
+
+                                            <input class="btn btn-primary" type="submit" value="Update">
+                                        {% endfor %}
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
+
+            {% include 'admin/footer.html' %}
+
+
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+<!-- base:js -->
+<script src="../../static/adminResources/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="../../static/adminResources/js/off-canvas.js"></script>
+<script src="../../static/adminResources/js/hoverable-collapse.js"></script>
+<script src="../../static/adminResources/js/template.js"></script>
+<script src="../../static/adminResources/js/settings.js"></script>
+<script src="../../static/adminResources/js/todolist.js"></script>
+<!-- endinject -->
+<!-- plugin js for this page -->
+<script src="../../static/adminResources/js/jquery.validate.min.js"></script>
+<script src="../../static/adminResources/js/bootstrap-maxlength.min.js"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<script src="../../static/adminResources/js/form-validation.js"></script>
+<script src="../../static/adminResources/js/bt-maxLength.js"></script>
+<!-- End custom js for this page-->
+</body>
+
+</html>
