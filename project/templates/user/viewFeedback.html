@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Wagondash Admin</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="../../static/adminResources/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../../static/adminResources/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" href="../../static/adminResources/css/dataTables.bootstrap4.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../static/adminResources/css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../../static/adminResources/images/favicon.png" />
+</head>
+
+<body class="sidebar-light">
+  <div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+
+
+    {% include 'user/header.html' %}
+
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:../../partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="mdi mdi-settings"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close mdi mdi-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+          <div class="sidebar-bg-options selected" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles primary"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
+        </div>
+      </div>
+      <!-- partial -->
+      <!-- partial:../../partials/_sidebar.html -->
+
+
+            {% include 'user/menu.html' %}
+
+
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Feedback table</h4>
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="order-listing" class="table">
+                      <thead>
+                        <tr>
+                            <th>Feedback subject</th>
+                            <th>Feedback Description</th>
+
+                            <th>Rating</th>
+                            <th>Feedback Date</th>
+                            <th>Feedback Time</th>
+                            <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                       {% for row in feedbackVOList %}
+                        <tr>
+                            <td>{{row['feedbackSubject']}}</td>
+                            <td>{{row['feedbackDescription']}}</td>
+                            <td>
+                                {%  for row in range(0,row['feedbackRating']|int) %}
+                                    {{ "★" }}
+                                {% endfor %}
+
+                            </td>
+                            <td>{{row['feedbackDate']}}</td>
+                            <td>{{row['feedbackTime']}}</td>
+
+                            <td>
+                              <a href="/user/deleteFeedback?feedbackId={{row['feedbackId']}}">delete</a>
+                            </td>
+                        </tr>
+                       {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+
+
+        {% include 'user/footer.html' %}
+
+
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- base:js -->
+  <script src="../../static/adminResources/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="../../static/adminResources/js/off-canvas.js"></script>
+  <script src="../../static/adminResources/js/hoverable-collapse.js"></script>
+  <script src="../../static/adminResources/js/template.js"></script>
+  <script src="../../static/adminResources/js/settings.js"></script>
+  <script src="../../static/adminResources/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- plugin js for this page -->
+  <script src="../../static/adminResources/js/jquery.dataTables.js"></script>
+  <script src="../../static/adminResources/js/dataTables.bootstrap4.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="../../static/adminResources/js/data-table.js"></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>
